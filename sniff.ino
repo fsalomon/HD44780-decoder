@@ -24,7 +24,7 @@ volatile char d0, d1, d2, d3, d4, d5, d6, d7, rs, rw;
 
 void decode(void);
 
-bool gotUpNib = true;
+bool gotUpNib = false;
 bool fourBitMode = true;
 uint8_t upperNibble;
 long changetime = 0;
@@ -123,7 +123,8 @@ const uint8_t LCD_SETDDRAMADDR = 0x80;
 const uint8_t LCD_SETDDRAMADDR_MASK = 0x80;
 
 const uint8_t LCD_SETFUNCTION_4BIT = 0x20;
-const uint8_t LCD_SETFUNCTION_MASK = 0x30;
+const uint8_t LCD_SETFUNCTION_8BIT = 0x30;
+const uint8_t LCD_SETFUNCTION_MASK = 0xF0;
 
 void evalCommand(uint8_t command) {
   if ((command & LCD_CLEAR_MASK) == LCD_CLEAR) {
@@ -141,7 +142,7 @@ void evalCommand(uint8_t command) {
     }
     return;
   }
-  if ((command & LCD_SETFUNCTION_MASK) == LCD_SETFUNCTION_MASK) {
+  if ((command & LCD_SETFUNCTION_MASK) == LCD_SETFUNCTION_8BIT) {
     fourBitMode = false;
     return;
   }
