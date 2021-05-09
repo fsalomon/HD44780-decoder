@@ -47,7 +47,7 @@ void setup() {
   FastGPIO::Pin<D0>::setInput();
   Serial.println("Ready");
 
-  attachInterrupt(digitalPinToInterrupt(EN), decode, RISING);
+  attachInterrupt(digitalPinToInterrupt(EN), decode, FALLING);
 }
 
 void loop() {
